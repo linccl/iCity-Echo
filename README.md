@@ -18,6 +18,12 @@ Windows（PowerShell）：
 powershell -ExecutionPolicy Bypass -File scripts\install.ps1
 ```
 
+Windows（CMD）：
+
+```bat
+scripts\install.cmd
+```
+
 ### 手动方式
 
 ```bash
@@ -52,6 +58,12 @@ Windows（PowerShell）：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\quickstart.ps1
+```
+
+Windows（CMD）：
+
+```bat
+scripts\quickstart.cmd
 ```
 
 ### 方式 A：配置文件（推荐）
