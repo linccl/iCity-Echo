@@ -13,20 +13,20 @@ if %errorlevel%==0 (
 )
 
 if not defined PY_CMD (
-  echo 未找到 Python^（建议安装 Python 3.9+，或确保 py/python 在 PATH 中^）。 1>&2
+  echo Python not found (install Python 3.9+ or ensure py/python is in PATH). 1>&2
   exit /b 2
 )
 
 if not exist ".venv\\Scripts\\python.exe" (
-  echo 创建虚拟环境：.venv
+  echo Creating virtual env: .venv
   %PY_CMD% -m venv .venv
 )
 
 if not exist ".venv\\Scripts\\python.exe" (
-  echo 虚拟环境创建失败：.venv\\Scripts\\python.exe 不存在。 1>&2
+  echo Virtual env creation failed: .venv\\Scripts\\python.exe not found. 1>&2
   exit /b 2
 )
 
-echo 安装依赖：requirements.txt
+echo Installing dependencies: requirements.txt
 ".venv\\Scripts\\python.exe" -m pip install -r requirements.txt
-echo 完成。
+echo Done.
