@@ -1,0 +1,30 @@
+{
+  "cookie_file": "cookie.txt",
+  "state_file": "state.json",
+  "check_url": "https://icity.ly/friends",
+  "base_url": "https://icity.ly",
+  "timeout": 15,
+  "max_notify": 8,
+  "alert_cooldown_minutes": 60,
+  "schedule": {
+    "enabled": true,
+    "interval_minutes": 10,
+    "quiet_hours": {
+      "start": "00:00",
+      "end": "09:00"
+    }
+  },
+  "channels": [
+    {
+      "type": "feishu",
+      "name": "feishu-main",
+      "enabled": true,
+      "webhook": "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
+    },
+    {
+      "type": "other",
+      "name": "future-channel",
+      "enabled": false
+    }
+  ]
+}

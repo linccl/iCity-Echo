@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+.pycache/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# local secrets/state
+cookie*.txt
+config*.json
+!config.example.json
+state*.json
+*.bak-*
+*.log
+
+# env/secrets
+.env
+.env.*
+
+# editor/os
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
