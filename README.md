@@ -4,6 +4,22 @@
 
 ## 1) 安装依赖
 
+### 快速方式（推荐）
+
+macOS / Linux：
+
+```bash
+bash scripts/install.sh
+```
+
+Windows（PowerShell）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\install.ps1
+```
+
+### 手动方式
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -23,6 +39,20 @@ chmod 600 cookie.txt
 ```
 
 ## 3) 运行
+
+### 快速启动（推荐）
+
+macOS / Linux：
+
+```bash
+bash scripts/quickstart.sh
+```
+
+Windows（PowerShell）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\quickstart.ps1
+```
 
 ### 方式 A：配置文件（推荐）
 
