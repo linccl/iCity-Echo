@@ -3,6 +3,20 @@ setlocal enableextensions enabledelayedexpansion
 
 cd /d "%~dp0.."
 
+set "FROM_EXPLORER=0"
+echo %CMDCMDLINE% | findstr /I /C:" /c " >nul 2>&1 && set "FROM_EXPLORER=1"
+
+goto :main
+
+:fail
+echo %~1 1>&2
+if "%FROM_EXPLORER%"=="1" (
+  echo.
+  pause
+)
+exit /b 2
+
+:main
 if not exist ".venv\\Scripts\\python.exe" (
   echo Virtual env not found, installing dependencies...
   call "%~dp0install.cmd"
@@ -11,24 +25,20 @@ if not exist ".venv\\Scripts\\python.exe" (
 
 if not exist "config.json" (
   copy /Y "config.example.json" "config.json" >nul
-  echo Generated config.json. Please fill in Feishu webhook and enable exactly one channel (enabled=true). 1>&2
-  exit /b 2
+  call :fail "Generated config.json. Please fill in Feishu webhook and enable exactly one channel (enabled=true)."
 )
 
 if not exist "cookie.txt" (
-  echo Missing cookie.txt: paste your browser Cookie into cookie.txt (single line). 1>&2
-  exit /b 2
+  call :fail "Missing cookie.txt: paste your browser Cookie into cookie.txt (single line)."
 )
 for %%A in ("cookie.txt") do set "COOKIE_SIZE=%%~zA"
 if "!COOKIE_SIZE!"=="0" (
-  echo cookie.txt is empty: paste your browser Cookie into cookie.txt (single line). 1>&2
-  exit /b 2
+  call :fail "cookie.txt is empty: paste your browser Cookie into cookie.txt (single line)."
 )
 
 findstr /C:"hook/xxx" config.json >nul 2>&1
 if %errorlevel%==0 (
-  echo Please fill in a real Feishu webhook in config.json (do not keep hook/xxx placeholder). 1>&2
-  exit /b 2
+  call :fail "Please fill in a real Feishu webhook in config.json (do not keep hook/xxx placeholder)."
 )
 
 set "HAS_ONCE="
@@ -41,8 +51,7 @@ for %%A in (%*) do (
 if not defined HAS_ONCE if not defined HAS_LOOP (
   findstr /C:"\"interval_minutes\"" config.json >nul 2>&1
   if errorlevel 1 (
-    echo config.json missing schedule.interval_minutes (minutes). Please configure it before starting. 1>&2
-    exit /b 2
+    call :fail "config.json missing schedule.interval_minutes (minutes). Please configure it before starting."
   )
 )
 
